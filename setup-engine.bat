@@ -1,0 +1,1 @@
+IF NOT EXIST %~dp0n00b-Engine MKLINK /J n00b-Engine %~dp0..\n00b-Engine
