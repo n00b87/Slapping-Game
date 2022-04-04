@@ -207,8 +207,10 @@ Sub GZ_Actor_SetAnimation(actor)
 	Select Case Player_Current_Action
 	
 	Case PLAYER_ACTION_STAND_RIGHT
+		If Sprite_Animation_Name$[Actor_Sprite[actor], Actor_CurrentAnimation[actor]] <> "Idle_right" Then
+			Actor_SetAnimationFrame(actor, 0)
+		End If
 		Actor_SetAnimationByName(actor, "Idle_right")
-		Actor_SetAnimationFrame(actor, 0)
 	
 	Case PLAYER_ACTION_WALK_RIGHT
 		Actor_SetAnimationByName(actor, "Run_right")
@@ -218,8 +220,10 @@ Sub GZ_Actor_SetAnimation(actor)
 		Actor_SetAnimationFrame(actor, 0)
 		
 	Case PLAYER_ACTION_STAND_LEFT
+		If Sprite_Animation_Name$[Actor_Sprite[actor], Actor_CurrentAnimation[actor]] <> "Idle_left" Then
+			Actor_SetAnimationFrame(actor, 0)
+		End If
 		Actor_SetAnimationByName(actor, "Idle_left")
-		Actor_SetAnimationFrame(actor, 0)
 	
 	Case PLAYER_ACTION_WALK_LEFT
 		Actor_SetAnimationByName(actor, "Run_left")
@@ -503,8 +507,8 @@ Sub Player_Init()
 	
 	Player_Action = PLAYER_ACTION_STAND_RIGHT
 	
-	Graizor_Jump_Height = 40
-	Graizor_Jump_Force = 3.5
+	Graizor_Jump_Height = 120
+	Graizor_Jump_Force = 5
 
 End Sub
 
