@@ -4,29 +4,10 @@ PROJECT_MAIN:test_game.bas
 AUTHOR:Rodney Cunningham
 WEBSITE:rcbasic.com
 DESCRIPTION:Graizor Game Project
-SOURCE_REL:amber_beam.bas
-SOURCE_REL:bitwalker_ai.bas
-SOURCE_REL:boss_hud.bas
-SOURCE_REL:city_boss.bas
-SOURCE_REL:claw_ai.bas
-SOURCE_REL:default.bas
-SOURCE_REL:energy_cell.bas
-SOURCE_REL:forest_boss.bas
-SOURCE_REL:graizor.bas
-SOURCE_REL:gren_ai.bas
-SOURCE_REL:guard_ai.bas
-SOURCE_REL:hover_ai.bas
 SOURCE_REL:joystick.bas
-SOURCE_REL:limit.bas
 SOURCE_REL:lines.bas
-SOURCE_REL:m1_ai.bas
 SOURCE_REL:math_util.bas
-SOURCE_REL:platforms.bas
-SOURCE_REL:simple_touch.bas
-SOURCE_REL:skull_bomb.bas
-SOURCE_REL:skull_wheel.bas
 SOURCE_REL:strings.bas
-SOURCE_REL:test_concepts.bas
 SOURCE_REL:test_game.bas
-SOURCE_REL:tst.bas
 SOURCE_REL:tst_concept.bas
+SOURCE_REL:rock.bas
