@@ -1,0 +1,13 @@
+RCBASIC_STUDIO:1.0
+PROJECT_NAME:Slapping Game
+PROJECT_MAIN:test_game.bas
+AUTHOR:Rodney Cunningham
+WEBSITE:rcbasic.com
+DESCRIPTION:Slapping-Game Project
+SOURCE_REL:joystick.bas
+SOURCE_REL:lines.bas
+SOURCE_REL:math_util.bas
+SOURCE_REL:strings.bas
+SOURCE_REL:test_game.bas
+SOURCE_REL:tst_concept.bas
+SOURCE_REL:rock.bas
