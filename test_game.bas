@@ -105,6 +105,11 @@ Function Run_Game()
 			Exit While
 		End If
 		
+		If smith_health <= 0 Then
+			end_flag = 1
+			Exit While
+		End If
+		
 		
 		DrawHud(lives)
 		
