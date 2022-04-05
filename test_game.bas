@@ -9,10 +9,12 @@ Game_WindowOpen("demo",960,640,flag)
 CanvasOpen(5, 960, 640, 0, 0, 960, 640, 1)
 SetCanvasZ(5, 0)
 
-Sub DrawHud(lives)
+Sub DrawHud(n_lives)
 	Canvas(5)
-	For i = 0 to lives-1
-		DrawImage(Sprite_Image[Actor_Sprite[rock]], 20 + (i*32), 20)
+	ClearCanvas
+	rh = GetActorID("rh")
+	For i = 0 to n_lives-1
+		DrawImage(Sprite_Image[Actor_Sprite[rh]], 20 + (i*32), 20)
 	Next
 End Sub
 
@@ -43,7 +45,7 @@ While Not Key(K_ESCAPE)
 	'--------------------
 	
 	If death_action Then
-		If (timer - death_timer) > 1200 Then
+		If (timer - death_timer) > 2000 Then
 			'Print "balls"
 			death_action = false
 			Actor_SetEffect(rock, EFFECT_NONE, 0)
@@ -55,9 +57,9 @@ While Not Key(K_ESCAPE)
 		Lives = Lives - 1
 		death_action = true
 		death_timer = timer
-		Actor_SetEffect(rock, EFFECT_FLASH, 1200)
+		Actor_SetEffect(rock, EFFECT_FLASH, 200)
 	End If
-		
+	
 	
 	DrawHud(lives)
 	
