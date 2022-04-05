@@ -9,9 +9,11 @@ Game_WindowOpen("demo",960,640,flag)
 CanvasOpen(5, 960, 640, 0, 0, 960, 640, 1)
 SetCanvasZ(5, 0)
 
+Title_Screen()
+
 Sub DrawHud(n_lives)
 	Canvas(5)
-	ClearCanvas
+	ClearCanvas()
 	rh = GetActorID("rh")
 	For i = 0 to n_lives-1
 		DrawImage(Sprite_Image[Actor_Sprite[rh]], 20 + (i*32), 20)
@@ -22,6 +24,10 @@ LoadStage("oscar-stage.stage")
 
 'SFX
 LoadSound(0, "sfx/slap-sound.wav")
+
+graizor_shot_sound = 1
+
+'LoadSound(graizor_shot_sound, "laugh-1.wav")
 
 Stage_Init(2)
 Player_Init()
@@ -60,9 +66,16 @@ While Not Key(K_ESCAPE)
 		Actor_SetEffect(rock, EFFECT_FLASH, 200)
 	End If
 	
+	If Lives < 1 Then
+		Exit While
+	End If
+	
 	
 	DrawHud(lives)
 	
 	Game_Render()
 	
 Wend
+
+
+

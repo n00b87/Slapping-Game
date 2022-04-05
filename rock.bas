@@ -428,6 +428,44 @@ Sub Player_Control_Ex(actor)
 	End If
 	
 	
+	
+	
+	If Player_Button(PLAYER_SLASH_BUTTON,0) And (Not Player_isStunned) Then
+		print "debug: ";blaster_max_shots_onscreen;", ";graizor
+		If Timer - blaster_timer > 200 Then
+			For i = 0 to blaster_max_shots_onscreen-1
+				If Not Actor_Active[blaster_shot[i]] Then
+					Actor_SetActive(blaster_shot[i], True)
+					Actor_SetAnimation(blaster_shot[i], 0)
+					Actor_SetAnimationFrame(blaster_shot[i], 0)
+					If Player_Action = PLAYER_ACTION_STAND_LEFT Or Player_Action = PLAYER_ACTION_WALK_LEFT Then
+						Actor_SetPosition(blaster_shot[i], Actor_X[graizor]+47, Actor_Y[graizor]+30)
+						blaster_shot_speed[i, 1] = 0
+						blaster_shot_speed[i, 0] = -1 * blaster_shot_move_speed
+					ElseIf Player_Action = PLAYER_ACTION_STAND_RIGHT Or Player_Action = PLAYER_ACTION_WALK_RIGHT Then
+						Actor_SetPosition(blaster_shot[i], Actor_X[graizor]+80, Actor_Y[graizor]+30)
+						blaster_shot_speed[i, 1] = 0
+						blaster_shot_speed[i, 0] = blaster_shot_move_speed
+					End If
+				
+					
+					blaster_timer = timer
+					'PlaySound(graizor_shot_sound, 0, 0)
+					'print "shoot"
+					Exit For
+				End If
+			Next
+		End If
+		print "debug 2"
+	End If
+	
+	
+	
+	
+	
+	
+	
+	
 	'''----------END OF CONTROLS---------
 	
 		'-25-20
@@ -509,6 +547,15 @@ Sub Player_Init()
 	
 	Graizor_Jump_Height = 120
 	Graizor_Jump_Force = 5
+	
+	spr = LoadSprite("yolo")
+	For i = 0 to blaster_max_shots_onscreen
+		blaster_shot[i] = NewActor("shot_" + str(i), spr)
+		Actor_SetLayer(blaster_shot[i], Actor_Layer[graizor])
+		Actor_SetActive(blaster_shot[i], False)
+		Actor_Physics[blaster_shot[i]] = True
+		Actor_Weight[blaster_shot[i]] = 0
+	Next
 
 End Sub
 
