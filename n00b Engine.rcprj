@@ -1,0 +1,31 @@
+RCBASIC_STUDIO:1.0
+PROJECT_NAME:n00b Engine
+PROJECT_MAIN:editor.bas
+AUTHOR:Rodney Cunningham
+WEBSITE:rcbasic.com
+DESCRIPTION:n00b's Game Engine
+SOURCE_REL:editor.bas
+SOURCE_REL:default.bas
+SOURCE_REL:dlg.bas
+SOURCE_REL:editor_actor_options.bas
+SOURCE_REL:editor_bkg_options.bas
+SOURCE_REL:editor_main_ui.bas
+SOURCE_REL:editor_shape_options.bas
+SOURCE_REL:editor_sprite_menu.bas
+SOURCE_REL:editor_tile_menu.bas
+SOURCE_REL:editor_top_menu.bas
+SOURCE_REL:editor_top_menu_lib.bas
+SOURCE_REL:engine.bas
+SOURCE_REL:engine_doc.bas
+SOURCE_REL:gui.bas
+SOURCE_REL:gui_debug.bas
+SOURCE_REL:gui_demo.bas
+SOURCE_REL:gui_doc.bas
+SOURCE_REL:gui_draw.bas
+SOURCE_REL:joystick.bas
+SOURCE_REL:lines.bas
+SOURCE_REL:math_util.bas
+SOURCE_REL:spriteMain_ui.bas
+SOURCE_REL:strings.bas
+SOURCE_REL:simple_touch.bas
+SOURCE_REL:game_engine.bas

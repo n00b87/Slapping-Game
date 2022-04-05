@@ -1,0 +1,253 @@
+TO DO
+---------------
+*In Game RenderStage
+*Engine - Actor_Hit, Actor_MouseHover, Actor_SetVisible, Actor_SetAnimation, Actor_Play,
+        - Actor_Rotate, Actor_Zoom, Actor_Rotozoom, Actor_SetAlpha, Actor_GetAlpha, Actor_GetCurrentAnimation, Actor_GetCurrentFrame, Actor_SetFPS, Actor_GetFPS,
+        - Actor_Pause, Actor_SetFrame, Actor_Stop, Actor_GetStagePosition, Actor_GetScreenPosition, Actor_GetRotation, Actor_GetZoom, Actor_isVisible,
+        - Actor_SetSolid, Actor_isSolid, Actor_SetWeight, Actor_GetWeight, Actor_SetForce, Actor_GetPhysicsState
+        
+        - Stage_SetGravity, Stage_GetGravity, Stage_Layer_SetVisible, Stage_Layer_IsVisible, Stage_Camera_SetOffset, Stage_Camera_SetViewport, Stage_Layer_SetAlpha, Stage_Layer_GetAlpha
+        - Stage_Camera_CenterOn, Stage_Camera_Move
+        
+        - KeyDown, KeyUp, KeyPressed, MouseDown, MouseUp, MouseClicked, ScreenToStage, StageToScreen, Joy_ButtonDown, Joy_ButtonUp, Joy_ButtonPressed, Joy_HatDown,
+        - Joy_HatUp, Joy_HatPressed, Joy_Axis
+
+
+------------------------------------------
+Tileset File Structure -- *.tset
+------------------------------------------
+Item       |  Size    |  Description
+------------------------------------------
+
+Version     |   4b     |  Version Number
+
+Count      |   4b     |  Number of Tiles
+
+
+	----------------------------------------------------------
+	Tile Data  |   ---    | Tile Data Structure for each tile
+	----------------------------------------------------------
+
+	Frame Count  |  1b               |  Number of Animation Frames
+
+	Frames[]     |  4b x Frame Count |  The tile indexes for each frame
+
+
+--------------------------------------------------------------------------------------------
+
+---------------------------------------------
+Sprite File Structure -- *.sprite
+---------------------------------------------
+Item         |  Size    |  Description
+------------------------------------------
+
+Version      |  4b      |  Version Number
+
+Frame Width  |  4b      |  Width of each animation frame
+
+Frame Height |  4b      |  Height of each animation frame
+
+Frame Count  |  4b      |  Number of frames in the sprite sheet
+
+Anim Count   |  4b      |  Number of animations
+
+Bound Shape  |  1b      |  Shape of the bounds for sprite
+	
+	-------------------------------------------------
+	Sprite Frame |  ---   |  Sprite Structure for each frame
+	-------------------------------------------------
+
+	Bound X      |  4b    |  X position relative to start of frame
+
+	Bound Y      |  4b    |  Y position relative to start of frame
+
+	Bound Par 1  |  4b    |  Parameter 1
+
+	Bound Par 2  |  4b    |  Parameter 2
+	-------------------------------------------------
+	
+	
+
+	-------------------------------------------------
+	Sprite Animation |  ---   |  Sprite Structure for each animation
+	-------------------------------------------------
+	
+	Anim Name        | String |  Name of the animation
+
+	Anim Frame Count |  4b    |  Number of frames in the animation
+
+	Anim FPS         |  4b    |  Animation speed
+
+	Anim Frames[]    |  4b    |  The frame index for each frame
+
+	-------------------------------------------------
+
+--------------------------------------------------------------------------------------------
+
+-----------------------------------------------------
+Actor File Structure -- *.actor
+-----------------------------------------------------
+
+Version			|  4b		|   Version Number
+
+Sprite Name		|	String	|	Name of Sprite
+
+Animation		|	4b		|	Default Animation
+
+--------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------
+Map File Structure -- *.stage
+----------------------------------------------------------
+Item       |  Size    |  Description
+----------------------------------------------------------
+
+Header     |  4b      |  Version Number
+
+T_Width    |  4b      |  Width in Tiles
+
+T_Height   |  4b      |  Height in Tiles
+
+P_Width    |  4b      |  Width in Pixels
+
+P_Height   |  4b      |  Height in Pixels
+
+Tile Width |  4b      |  Width of each tile
+
+Tile Height|  4b      |  Height of each tile
+
+Tile FPS          |  1b               |  Frames Per Second
+
+------------------------------------
+TileSets - For each tileset
+------------------------------------
+
+TileSet File$  |  Read Until byte = 0  |  TileSet Image File
+
+------------------------------------
+Layer Data for each layer
+------------------------------------
+
+	Layer Type    |  1b   |  The type of data in the layer
+
+	Layer Active  |  1b   |  Whether or not the layer is active
+
+	Layer ColDet  |  1b   |  Whether or not to check collisions on the layer
+	
+	Layer Shape Count  |  4b  |  Number of shapes in the layer
+	
+	Layer Actor Count  |  4b  |  Number of Actors in the layer
+
+
+	------- IF Background Layer THEN ----------
+
+	Image File   |  Read Until byte = 0  |  Background Image
+	
+	TYPE         |  1b                   |  Whether background is an image or a drawing surface
+
+	FLAG         |  1b                   |  Whether background is stretched, tiled, or blitted
+
+	Zoom X       |  4b                   |  Zoom X = VALUE / 100  (ie. 125 -> 1.25)
+
+	Zoom Y       |  4b                   |  Same as Zoom X
+
+	Angle        |  4b                   |  Angle in Degrees
+
+	Blit X       |  4b                   |  Source X
+
+	Blit Y       |  4b                   |  Source Y
+
+	Blit W       |  4b                   |  Source W
+
+	Blit H       |  4b                   |  Source H
+	
+	Scroll_H     |  4b                   |  Horizontal Scroll Speed
+	
+	Scroll V     |  4b                   |  Vertical Scroll speeed
+
+	R            |  1b                   |  Red
+
+	G            |  1b                   |  Green
+
+	B            |  1b                   |  Blue
+	
+	A            |  1b                   |  Alpha
+
+	------ END Background --------------------
+
+	------- IF Tile Layer THEN ---------------
+
+	   ------Tile Data [T_Width, T_Height] ------------
+
+	Tileset     |  1b  |  The tileset the tile is in
+
+	Tile Index  |  4b  |  The index of each tile in the layer
+
+		------------------------------
+
+	------ END Tile --------------------------
+
+	------------------------------------------
+	Shape Data
+	------------------------------------------
+
+	Type  |  1b  |  The type of shape (ie. Line, Rect)
+
+	X     |  4b  |  The X Position of the shape in the stage
+
+	Y     |  4b  |  The Y Position of the shape in the stage
+
+	P1    |  4b  |  The parameter1 Value which represents either the width or x2 value depending on the shape
+
+	P2    |  4b  |  The parameter2 Value which represents either the height or y2 value depending on the shape
+	
+	--------------------------------------------
+	Actor Data
+	--------------------------------------------
+	
+	Actor Name  |  String  |  Actor Name used to get an ID in engine
+	
+	Sprite Name |  String  |  Sprite name
+	
+	Animation   |  4b      |  Default sprite animation
+	
+	X           |  4b      |  X Position
+	
+	Y           |  4b      |  Y Position
+	
+	ZX          |  4b      |  Zoom X
+	
+	ZY          |  4b      |  Zoom Y
+	
+	Angle       |  4b      |  Rotation Angle
+	
+	Physics		|  1b	   |  Whether or not physics is enabled for the Actor
+	
+	
+------------------------------------
+Sector Structure
+------------------------------------
+
+Sector_Width  |  4b  |  Width of each sector
+
+Sector_Height |  4b  |  Height of each sector
+
+	---------------------------------------------
+	Sector Data
+	---------------------------------------------
+	
+	Sector_X   |  4b  |  Starting X Position of the sector
+	
+	Sector_Y   |  4b  |  Starting Y Position of the sector
+	
+	Num_Shapes |  4b  |  Number of Shapes in the sector
+	
+		-----------------------------------------
+		Sector Shapes
+		-----------------------------------------
+		
+		Shape_Layer  |  4b  |  The layer the shape is in
+		
+		Shape_Index  |  4b  |  The index in the shape layer array
+

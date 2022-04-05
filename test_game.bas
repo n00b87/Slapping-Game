@@ -24,7 +24,7 @@ victory_bkg = 998
 defeat_bkg = 997
 
 
-Include "n00b-engine/game_engine.bas"
+Include "engine.bas"
 Include "rock.bas"
 Include "smith.bas"
 Include "title.bas"
