@@ -1,5 +1,5 @@
 
 
-Sub Title_Screen()
-
-End Sub
+Function Title_Screen()
+	Return True
+End Function

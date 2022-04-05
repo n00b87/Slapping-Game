@@ -1,4 +1,16 @@
 Dim graizor
+smith = -1
+jada = -1
+
+smith_health = 50
+jada_health = 200
+
+smith_stun = false
+jada_stun = false
+
+smith_stun_time = 0
+jada_stun_time = 0
+
 Dim beam_sword
 Dim blaster
 
@@ -431,7 +443,7 @@ Sub Player_Control_Ex(actor)
 	
 	
 	If Player_Button(PLAYER_SLASH_BUTTON,0) And (Not Player_isStunned) Then
-		print "debug: ";blaster_max_shots_onscreen;", ";graizor
+		'print "debug: ";blaster_max_shots_onscreen;", ";graizor
 		If Timer - blaster_timer > 200 Then
 			For i = 0 to blaster_max_shots_onscreen-1
 				If Not Actor_Active[blaster_shot[i]] Then
@@ -450,17 +462,35 @@ Sub Player_Control_Ex(actor)
 				
 					
 					blaster_timer = timer
-					'PlaySound(graizor_shot_sound, 0, 0)
+					PlaySound(joke_shot_sfx, 0, 0)
 					'print "shoot"
 					Exit For
 				End If
 			Next
 		End If
-		print "debug 2"
+		'print "debug 2"
 	End If
 	
 	
 	
+	For i = 0 to blaster_max_shots_onscreen-1
+		If Actor_Active[blaster_shot[i]] Then
+			If Not Actor_isOnScreen(blaster_shot[i]) Or (Actor_CurrentAnimation[blaster_shot[i]] = 1 And Actor_AnimationEnded[blaster_shot[i]]) Then
+				Actor_SetActive(blaster_shot[i], False)
+			Else
+				Actor_Move(blaster_shot[i], blaster_shot_speed[i,0], 0)
+			End If
+			
+			If Actor_GetCollision(blaster_shot[i], smith) and (Not smith_stun) Then
+				smith_stun = true
+				smith_stun_time = timer
+				Actor_SetEffect(smith, EFFECT_FLASH, 50)
+				smith_health = smith_health - 1
+				'Print "Smith Health = "; smith_health
+			End If
+			
+		End If
+	Next
 	
 	
 	
@@ -548,12 +578,12 @@ Sub Player_Init()
 	Graizor_Jump_Height = 120
 	Graizor_Jump_Force = 5
 	
-	spr = LoadSprite("yolo")
-	For i = 0 to blaster_max_shots_onscreen
+	spr = LoadSprite("laugh")
+	For i = 0 to blaster_max_shots_onscreen-1
 		blaster_shot[i] = NewActor("shot_" + str(i), spr)
 		Actor_SetLayer(blaster_shot[i], Actor_Layer[graizor])
 		Actor_SetActive(blaster_shot[i], False)
-		Actor_Physics[blaster_shot[i]] = True
+		Actor_Physics[blaster_shot[i]] = False
 		Actor_Weight[blaster_shot[i]] = 0
 	Next
 

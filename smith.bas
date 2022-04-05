@@ -1,4 +1,3 @@
-smith = -1
 smith_current_action = 0
 
 slap = -1
@@ -66,6 +65,13 @@ Sub Smith_Set_Animation()
 End Sub
 
 Sub smith_act()
+	If smith_stun Then
+		If Timer - smith_stun_time > 400 Then
+			smith_stun = false
+			Actor_SetEffect(smith, EFFECT_NONE, 0)
+		End If
+	End If
+
 	If Actor_AnimationEnded[smith] Then
 		smith_steps = smith_steps + 1
 	End If
