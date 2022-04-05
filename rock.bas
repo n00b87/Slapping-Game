@@ -519,3 +519,4 @@ Sub Stage_Init(p_layer)
 End Sub
 
 
+rock = graizor

@@ -1,6 +1,8 @@
 smith = -1
 smith_current_action = 0
 
+slap = -1
+
 smith_steps = 0
 smith_Jump_Height = 0
 smith_Jump_Force = 0
@@ -21,6 +23,7 @@ SMITH_ACTION_JUMP_RIGHT = 7
 
 Sub smith_init()
 	smith = GetActorID("smith")
+	slap = GetActorID("slap")
 	
 	Actor_Physics_State[smith] = PHYSICS_STATE_FALL
 	Actor_Weight[smith] = 3.5
@@ -39,16 +42,25 @@ Sub Smith_Set_Animation()
 	Select Case smith_current_action
 	Case SMITH_ACTION_STAND_LEFT
 		Actor_SetAnimationByName(smith, "Slap_left")
+		Actor_SetAnimationByName(slap, "Slap_left")
+		Actor_SetAnimationFrame(slap, 0)
+		Actor_SetPosition(slap, Actor_X[smith], Actor_Y[smith])
+		Actor_SyncAnimationTo(slap, smith)
 		
 	Case SMITH_ACTION_WALK_LEFT
 		Actor_SetAnimationByName(smith, "Walk_left")
+		Actor_SetPosition(slap, 1033, 10)
 	
 	Case SMITH_ACTION_STAND_RIGHT
 		Actor_SetAnimationByName(smith, "Slap_right")
+		Actor_SetAnimationByName(slap, "Slap_right")
+		Actor_SetAnimationFrame(slap, 0)
+		Actor_SetPosition(slap, Actor_X[smith], Actor_Y[smith])
+		Actor_SyncAnimationTo(slap, smith)
 		
 	Case SMITH_ACTION_WALK_RIGHT
 		Actor_SetAnimationByName(smith, "Walk_right")
-	
+		Actor_SetPosition(slap, 1033, 10)
 	
 	End Select
 End Sub
@@ -68,7 +80,7 @@ Sub smith_act()
 		End If
 		
 	Case SMITH_ACTION_WALK_LEFT
-		If smith_steps = 5 Then
+		If smith_steps = 3 Then
 			smith_steps = 0
 			smith_current_action = SMITH_ACTION_STAND_RIGHT
 		Else
@@ -82,7 +94,7 @@ Sub smith_act()
 		End If
 	
 	Case SMITH_ACTION_WALK_RIGHT
-		If smith_steps = 5 Then
+		If smith_steps = 3 Then
 			smith_steps = 0
 			smith_current_action = SMITH_ACTION_STAND_LEFT
 		Else
